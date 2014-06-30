@@ -1,2 +1,5 @@
 env/
 app/local/
+app/bin/
+app/cache/
+app/lib/
