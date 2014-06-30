@@ -4,14 +4,11 @@
 
 readonly PROGNAME=$(basename $0)
 readonly PROGDIR="$( cd "$(dirname "$0")" ; pwd -P )"
-readonly VIRTUALENV=`which virtualenv`
-readonly UWSGI=`which uwsgi`
+readonly CARTON=`which carton`
 
 ## These should be command line options:
 MY_APP_ROOT=${APP_ROOT}
-MY_APP_PORT=${APP_PORT}
 MY_APP_FILE=${APP_FILE}
-MY_APP_CALLABLE=${APP_CALLABLE}
 
 
 usage()
@@ -21,9 +18,7 @@ usage()
   echo -e "\033[33m./run.sh"
   echo -e "\t\033[33m-h --help"
   echo -e "\t\033[33m--dir=${MY_APP_ROOT} (i.e. application root directory)"
-  echo -e "\t\033[33m--port=${MY_APP_PORT} (i.e. app server http port)"
   echo -e "\t\033[33m--file=${MY_APP_FILE} (i.e. main application file found under ${MY_APP_ROOT}/app/...)"
-  echo -e "\t\033[33m--callable=${MY_APP_CALLABLE} (i.e. the WSGI callable inside of '${MY_APP_FILE}')"
   echo -e "\033[0m"
 }
 
@@ -41,14 +36,8 @@ parse_args()
       --dir)
         MY_APP_ROOT=$VALUE
         ;;
-      --port)
-        MY_APP_PORT=$VALUE
-        ;;
       --file)
         MY_APP_FILE=$VALUE
-        ;;
-      --callable)
-        MY_APP_CALLABLE=$VALUE
         ;;
       *)
         echo -e "\033[31mERROR: unknown parameter \"$PARAM\""
@@ -84,29 +73,14 @@ valid_app_file()
 }
 
 
-#if [ ! -d "${MY_APP_ROOT}/env" ]
-#then
-#	echo "creating a virtualenv environment"
-#	cd ${MY_APP_ROOT}; $VIRTUALENV env
-#	${MY_APP_ROOT}/env/bin/pip install -r app/requirements.txt
-#fi
-
-#if [ ! -f "${MY_APP_ROOT}/env/bin/uwsgi" ]
-#then
-#	echo "no virtualenv environment was created.  Fail!!!"
-#	exit 1
-#fi
-
 main()
 {
 
   parse_args
-  echo "app roo: ${MY_APP_ROOT}"
-
   valid_app_root
   valid_app_file
 
-  ${UWSGI} --http :${MY_APP_PORT} --wsgi-file ${MY_APP_ROOT}/app/${MY_APP_FILE} --callable ${MY_APP_CALLABLE} --touch-reload ${MY_APP_ROOT}/reload
+  ${CARTON} exec morbo ${MY_APP_ROOT}/app/${MY_APP_FILE}
 }
 
 parse_args "$@"

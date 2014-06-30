@@ -1,8 +1,9 @@
-# cdw/py-app
+# google-app
 #
 # VERSION      0.0.1
 
-FROM pinterb/ubuntu-python-dev:0.0.1
+#FROM pinterb/ubuntu-golang-dev:0.0.1
+FROM progrium/busybox
 
 MAINTAINER Brad Pinter brad.pinter@gmail.com
 
@@ -11,16 +12,17 @@ ENV LANGUAGE en_US.UTF-8
 ENV LC_ALL en_US.UTF-8
 
 ## run.sh (command line options)
-ENV APP_ROOT /opt/falcon
+ENV APP_ROOT /opt/gopher
 ENV APP_PORT 8080
 ENV APP_FILE helloworld.py
 ENV APP_CALLABLE app
 
-Add . /opt/falcon/
+Add . /opt/gopher/
 
-RUN pip install -r /opt/falcon/app/requirements.txt
+##RUN pip install -r /opt/falcon/app/requirements.txt
 
-VOLUME ["/opt/falcon/app"]
+VOLUME ["/opt/gopher/app"]
 
 ### define default command.
-CMD ["/opt/falcon/run.sh"]
+###CMD ["/opt/gopher/run.sh"]
+CMD ["/bin/sh"]
