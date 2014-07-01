@@ -13,7 +13,7 @@ ENV LC_ALL en_US.UTF-8
 ## run.sh (command line options)
 ENV APP_ROOT /srv/www
 ENV APP_FILE helloworld.pl
-ENV PERL_CARTON_PATH /srv/www/app
+ENV PERL_CARTON_PATH /srv/www/app/local
 
 RUN mkdir -p /srv/www
 Add . /srv/www/
