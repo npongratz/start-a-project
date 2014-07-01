@@ -1,7 +1,7 @@
-## Sample Python project
+## Sample Perl project
 
 This project is designed to get you started writing a [microservice](http://martinfowler.com/articles/microservices.html) using
-the [Python](https://www.python.org/) programming language.  This project uses the [Falcon](http://falconframework.org/) framework to implement a very
+the [Perl](https://www.perl.org/) programming language.  This project uses the [Mojolicious Lite](http://mojolicio.us/) framework to implement a very
 simple end point.
 
 Perhaps more importantly, this project uses [Docker](http://www.docker.com/) to run this web service in a Linux containter.  To
