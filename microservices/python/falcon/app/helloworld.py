@@ -8,10 +8,10 @@ import json
 # other things) that you think in terms of resources and state
 # transitions, which map to HTTP verbs.
 class HelloWorldResource:
-    def on_get(self, req, resp):
+    def on_get(self, req, resp, foo):
         """Handles GET requests"""
         resp.status = falcon.HTTP_200  # This is the default status
-        resp.body = ('\nHello World!!')
+        resp.body = ("Hello " + foo + ".  Python's Falcon thinks you are awesome!")
 
 # falcon.API instances are callable WSGI apps
 app = falcon.API()
@@ -20,4 +20,4 @@ app = falcon.API()
 hello = HelloWorldResource()
 
 # things will handle all requests to the '/things' URL path
-app.add_route('/hello', hello)
+app.add_route('/hello/{foo}', hello)

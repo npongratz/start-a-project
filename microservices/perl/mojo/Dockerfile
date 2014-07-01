@@ -2,7 +2,7 @@
 #
 # VERSION      0.0.1
 
-FROM pinterb/ubuntu-perl-dev:0.0.1
+FROM pinterb/ubuntu-perl-dev:0.0.5
 
 MAINTAINER Brad Pinter brad.pinter@gmail.com
 
